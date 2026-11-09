@@ -23,6 +23,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   `load` and `store` see it, with an `i64` offset. Unlike `load` and
   `store`, a write through it is not masked to the tensor's bounds (#1749).
 
+### Fixed
+
+- A kernel's in-memory cache key no longer holds the tile-library list as
+  written, only the digest of the resolved, de-duplicated libraries. A launch
+  that names a default library again, or names a library through another
+  path, used to compile the kernel a second time and load a second module,
+  with its own copy of every `Global` (#1749).
+
 ### Documentation
 
 - Link the Tile library provider catalog and CUDA Oxide export workflow;
